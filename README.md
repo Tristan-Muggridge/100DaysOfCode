@@ -11,7 +11,7 @@ Day 1:
 - Using the Tailwind installation documentation I managed to get a project built and running which was a great first step if I've ever heard one.
 - Biggest lesson from today outside of just Tailwind in general, is read the docs! I ended up implementing a needlessly complicated React useState solution (because this is what I was comfortable with) to handle button-hover events since I wasn't sure how to implement this using the utility based approach of Tailwind (ended up deciding className={ function() ? isn't hovered : is hovered } and this was a huge waste of time when all I had to do was use the hover:<<Tailwind Utility>> syntax to get what I needed done! I'll be posting about how such biases can overcomplicate our codebases in a future dev.to article
 
-Tabs I had Open:
+Tabs I had Open:<br>
 https://tailwindcss.com/docs/configuration<br>
 https://tailwindcomponents.com/cheatsheet/<br>
 https://react-icons.github.io/react-icons/search?q=search<br>
