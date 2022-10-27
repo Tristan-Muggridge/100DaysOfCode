@@ -30,9 +30,8 @@ I want to emphasise that I have no interest in writing mountains of html for thi
 
 ```json
 {
-    ...
-    Alumni: {
-        Links: [
+    "Alumni": {
+        "Links": [
             [
                 "Alumni benefits",
                 "Contribute to UniSQ"
@@ -45,10 +44,9 @@ I want to emphasise that I have no interest in writing mountains of html for thi
                 "Alumni community"
             ]
         ], 
-        Prompt: "Connect with UniSQ and your fellow alumni", 
-        ButtonText: "Update your details"
-    },
-    ...
+        "Prompt": "Connect with UniSQ and your fellow alumni", 
+        "ButtonText": "Update your details"
+    }
 }
 ```
 
