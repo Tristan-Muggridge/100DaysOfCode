@@ -15,7 +15,11 @@ import { navDropDownData } from './navDropDownData'
 import { useState, useEffect } from 'react'
 
 const navHoverables = {Study: "Study", "Current Students": "Current Students", Research: "Research", Alumni: "Alumni", About: "About", None: "None", Magnify:"Magnify"};
-const carouselImages = [{img: carousel1, alt: ""}, {img: carousel2, alt: ""}, {img: carousel3, alt: ""}];
+const carouselImages = [
+  {img: carousel1, alt: "", bannerHeadline: "Rise in global rankings", bannerBlurb: "The University of Southern Queensland has been named in the Top 301-350 in the Time Higher Education World University Rankings."}, 
+  {img: carousel2, alt: "", bannerHeadline: "ヤッホ～　かわいいッピ", bannerBlurb: "サキュバスじゃないけど、我慢してみるよ～."}, 
+  {img: carousel3, alt: "", bannerHeadline: "奴ら勉強中をふりしてるっぽい", bannerBlurb: "正直言うと。。。多分ヘンタイを見てるところです"}
+];
 
 export default function Home() {
 
@@ -44,8 +48,6 @@ export default function Home() {
     window.addEventListener('resize', onResize);
   }, []);
 
-  console.debug(windowDimensions)
-
   return (
     <div className='w-full'>
       <Head>
@@ -59,11 +61,12 @@ export default function Home() {
       <main className='bg-white'>
 
         {/* Navigation Menu */}
-        { 
-          windowDimensions.width > 819 
-          ? 
-          <>
-          <nav className=" px-4 pt-5 flex justify-between max-w-6xl mx-auto">
+        
+          <nav className=" px-4 pt-4 flex justify-between max-w-6xl align-middle items-center mx-auto">
+          { 
+            windowDimensions.width > 819 
+            ? 
+            <>
             <h1 className='w-44'> <a href="http://localhost:3000/unisq"> <Image src={unisqLogo} alt="University of Southern Queensland logo"/> </a></h1>
               <div className='flex flex-col justify-center gap-4'>
                 <ul className=' flex justify-between gap-8 ml-auto'>
@@ -90,17 +93,15 @@ export default function Home() {
                   </div>
               </ul>
             </div>  
-          </nav>
           </> 
           : 
           <>
-            <nav className='px-4 py-4 flex justify-between max-w-6xl align-middle items-center'>
               <h1 className='w-44'> <a href="http://localhost:3000/unisq"> <Image src={unisqLogo} alt="University of Southern Queensland logo"/> </a></h1>
               <BiMenu className=' w-10 h-10 || hover:text-yellow-500 hover:cursor-pointer'/>
-            </nav>
           </>
         }
-        
+        </nav>
+
         
         {/* Navigation Sub-Menus */}
         <div className={hoveredNav != navHoverables.None ? 'bg-gray-100 h-96 absolute' : 'hidden'} onMouseEnter={() => {setHoveredNav(hoveredNav)}} onMouseLeave={() => {setHoveredNav(navHoverables.None)}}>
@@ -131,14 +132,14 @@ export default function Home() {
           </div>
         </section>
 
+        {/* Carousel */}
         <section>
-          {/* Carousel */}
           <div className='h-[600px] min-w-full'>
               <Image src={carouselImages[activeCarouselImage].img} alt={carouselImages[activeCarouselImage].alt} style={{"object-fit": "cover", "object-position": "50% 20%", "minHeight": "100%", "maxHeight": "100%", "userSelect": "none"}}/>
           </div>
 
             {/* <div className='-translate-y-32 '>  */}
-            <div className=' relative'> 
+            <div className='relative'> 
               {/* Carousel Playback */}
               <div className='-translate-y-24 -my-20'>
                 <ul className='flex justify-center mx-auto items-center'>
@@ -163,10 +164,9 @@ export default function Home() {
             
               {/* Banner */}
               <div className='bg-white text-center w-3/5 rounded-3xl p-4 mx-auto max-w-4xl mb-16'>
-                <h1 className='text-4xl font-semibold'>Rise in global rankings</h1>
-                <p className='text-lg mt-4'>
-                  The University of Southern Queensland has been named in the Top 301-350 in 
-                  the Time Higher Education World University Rankings. <a className='text-blue-500 hover:underline hover:cursor-pointer'> Read more. </a>
+                <h1 className='text-4xl font-semibold'> { carouselImages[activeCarouselImage].bannerHeadline } </h1>
+                <p className='text-lg mt-4'> {carouselImages[activeCarouselImage].bannerBlurb}
+                   <a className='text-blue-500 hover:underline hover:cursor-pointer'> Read more. </a>
                 </p>
               </div>
             </div>
