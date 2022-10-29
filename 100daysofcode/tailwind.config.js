@@ -8,7 +8,12 @@ module.exports = {
     extend: {
       colors: {
         'charcoal' : '#36454F'
+      },
+
+      height: {
+        '35': '35rem'
       }
+      
     },
   },
   plugins: [],
