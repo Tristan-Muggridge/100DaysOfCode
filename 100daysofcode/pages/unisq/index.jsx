@@ -1,47 +1,50 @@
 import Head from 'next/head'
 
 // Icons
-import { BiSearch, BiPlay, BiPause, BiMenu } from 'react-icons/bi'
+import { BiSearch, BiPlay, BiPause, BiMenu, BiChevronRight } from 'react-icons/bi'
 
 // Apparently can't use img in React? Problem for another day because this works!
 import Image from "next/image"
-import unisqLogo from "../../public/UniSQ/logo.svg"
+import MuggleLogo from "../../public/Muggle/logo.svg"
 
-import carousel1 from "../../public/unisq/carousel1.jpg"
-import carousel2 from "../../public/unisq/carousel2.jpg"
-import carousel3 from "../../public/unisq/carousel3.jpg"
+import carousel1 from "../../public/Muggle/carousel1.jpg"
+import carousel2 from "../../public/Muggle/carousel2.jpg"
+import carousel3 from "../../public/Muggle/carousel3.jpg"
 
 import { navDropDownData } from './navDropDownData'
 import { useState, useEffect } from 'react'
 
 const navHoverables = {Study: "Study", "Current Students": "Current Students", Research: "Research", Alumni: "Alumni", About: "About", None: "None", Magnify:"Magnify"};
 const carouselImages = [
-  {img: carousel1, alt: "", bannerHeadline: "Rise in global rankings", bannerBlurb: "The University of Southern Queensland has been named in the Top 301-350 in the Time Higher Education World University Rankings."}, 
-  {img: carousel2, alt: "", bannerHeadline: "ヤッホ～　かわいいッピ", bannerBlurb: "サキュバスじゃないけど、我慢してみるよ～."}, 
-  {img: carousel3, alt: "", bannerHeadline: "奴ら勉強中をふりしてるっぽい", bannerBlurb: "正直言うと。。。多分ヘンタイを見てるところです"}
+  {img: carousel1, alt: "", bannerHeadline: "Rise in global rankings", bannerBlurb: () => {return (<span>Muggle University has been named in the Top 301-350 in the Time Higher Education World University Rankings. <a className='text-blue-500 hover:underline hover:cursor-pointer'> Read more. </a></span>)}}, 
+  {img: carousel2, alt: "", bannerHeadline: "Applications now open", bannerBlurb: () => {return (<span> New opportunities, big ambitions. <a className='text-blue-neutral hover:underline hover:cursor-pointer'> Apply now </a> to start this November </span>)}}, 
+  {img: carousel3, alt: "", bannerHeadline: "A different path to your degree", bannerBlurb: () => {return (<span>Discover our free <a className='text-blue-neutral hover:underline hover:cursor-pointer'> pathway programs </a> with a guaranteed entry to most Muggle degrees </span>)}}
 ];
 
 export default function Home() {
+
+  const onResize = () => window.innerWidth > 819 ? setMobileMode(false) : setMobileMode(true)
+  const updateActiveCarouselImage = (element) => {setActiveCarouselImage(element)}
 
   const [ hoveredNav, setHoveredNav ] = useState(navHoverables.None);
   const [ activeCarouselImage, setActiveCarouselImage ] = useState(0);
   const [ playing, setPlaying ] = useState(true);
   const [ windowDimensions, setWindowDimensions ] = useState({height: 0, width: 0});
+  const [ mobileMode, setMobileMode ] = useState(false);
 
   useEffect(() => {
     if (playing == false) return;
 
     const interval = setInterval(() => {
       const nextImage = activeCarouselImage + 1 < carouselImages.length ? activeCarouselImage + 1 : 0;
-      setActiveCarouselImage( nextImage );
+      updateActiveCarouselImage( nextImage );
     }, 6000);
   
     return () => {
       clearInterval(interval);
     };
-  });
+  }, [updateActiveCarouselImage, setPlaying]);
 
-  const onResize = () => setWindowDimensions({height: window.innerHeight, width: window.innerWidth}); console.debug(windowDimensions)
 
   useEffect(() => {
     setWindowDimensions({height: window.innerHeight, width: window.innerWidth});
@@ -51,61 +54,64 @@ export default function Home() {
   return (
     <div className='w-full'>
       <Head>
-        <title>Mock-UniSQ Branding</title>
-        <meta name="description" content="Attempting to recreate the UniSQ home page to learn more about front-end development and Tailwind CSS" />
+        <title>Mock-Muggle Branding</title>
+        <meta name="description" content="Attempting to recreate the Muggle home page to learn more about front-end development and Tailwind CSS" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
       {/* Education Notice */}
-      {/* <h1 className='text-4xl absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10'> FOR EDUCATIONAL PURPOSES </h1> */}
+      {/* <h1 className='text-4xl absolute left-1/2 transform -translate-x-1/2 z-10'> FOR EDUCATIONAL PURPOSES </h1> */}
       <main className='bg-white'>
 
         {/* Navigation Menu */}
         
-          <nav className=" px-4 pt-4 flex justify-between max-w-6xl align-middle items-center mx-auto">
+          <nav className="px-4 pt-4 flex justify-between max-w-6xl align-middle items-center mx-auto -mb-[16px]">
           { 
-            windowDimensions.width > 819 
+            mobileMode == false 
             ? 
             <>
-            <h1 className='w-44'> <a href="http://localhost:3000/unisq"> <Image src={unisqLogo} alt="University of Southern Queensland logo"/> </a></h1>
-              <div className='flex flex-col justify-center gap-4'>
-                <ul className=' flex justify-between gap-8 ml-auto'>
+            <h1 className='w-36'> <a href="http://localhost:3000/Muggle"> <Image src={MuggleLogo} alt="Muggle University Logo" className='-translate-y-3'/> </a></h1>
+              <div className='flex flex-col justify-center'>
+                
+                <ul className=' flex justify-between gap-8 ml-auto p-4'>
                   {
                     ["LIBRARY", "INTERNATIONAL", "CONTACT", "UCONNECT"].map((e, indx) => {
                       return (
-                        <li key={indx} className='text-sm text-gray-600 hover:underline hover:cursor-pointer'> <a href="http://google.com"> {e} </a> </li>
+                        <li key={indx} className='text-sm text-blue-neutral hover:underline hover:cursor-pointer'> <a href="http://google.com"> {e} </a> </li>
                       )})
                   }
                 </ul>
-                <ul className=' flex justify-between'>
+
+                <ul className=' flex justify-between '>
                   {
                     ["Study", "Current Students", "Research", "Alumni", "About"].map((e, indx) => {
                       return (
                         <li key={indx} 
-                            className={hoveredNav != navHoverables[e] ? 'text-lg text-gray-700 pb-4 px-4' : 'text-lg text-gray-700 px-4 border-b-yellow-500 border-b-4 pb-0 cursor-pointer'}
+                            className={hoveredNav != navHoverables[e] ? 'mt-3 px-4 pb-4 || text-lg text-blue-dark' : 'mt-3 px-4 pb-2 text-lg text-blue-dark|| border-b-blue-neutral border-b-4 cursor-pointer'}
                             onMouseEnter={ () => {setHoveredNav(navHoverables[e])} }
                             onMouseLeave={ () => {setHoveredNav(navHoverables.None)}}
                         > {e} </li>
                       )})
                   }
-                  <div className='hover:border-b-yellow-500 hover:border-b-4 hover:cursor-pointer hover:pb-0 || '>
-                    <BiSearch className='text-2xl text-gray-700 '/>
+                  {/* <div className='text-lg blue-dark px-4 hover:border-b-blue-neutral hover:border-b-4 -mb-0.5 pb-6 mt-4 hover:cursor-pointer'> */}
+                  <div className='p-2 text-blue-dark my-auto || hover:outline hover:outline-1 hover:outline-blue-dark hover:rounded-full hover:cursor-pointer hover:text-blue-neutral'>
+                    <BiSearch className='text-2xl blue-dark inline '/>
                   </div>
               </ul>
             </div>  
           </> 
           : 
           <>
-              <h1 className='w-44'> <a href="http://localhost:3000/unisq"> <Image src={unisqLogo} alt="University of Southern Queensland logo"/> </a></h1>
-              <BiMenu className=' w-10 h-10 || hover:text-yellow-500 hover:cursor-pointer'/>
+              <h1 className='w-44'> <a href="http://localhost:3000/Muggle"> <Image src={MuggleLogo} alt="Muggle University Logo"/> </a></h1>
+              <BiMenu className=' w-10 h-10 || hover:text-blue-neutral hover:cursor-pointer'/>
           </>
         }
         </nav>
 
         
         {/* Navigation Sub-Menus */}
-        <div className={hoveredNav != navHoverables.None ? 'bg-gray-100 h-96 absolute' : 'hidden'} onMouseEnter={() => {setHoveredNav(hoveredNav)}} onMouseLeave={() => {setHoveredNav(navHoverables.None)}}>
-          <h2 className=' p-10 text-4xl'>{hoveredNav}</h2>
+        <div className={hoveredNav != navHoverables.None ? 'bg-gray-100 h-96 absolute w-full -mt-0.5' : 'hidden'} onMouseEnter={() => {setHoveredNav(hoveredNav)}} onMouseLeave={() => {setHoveredNav(navHoverables.None)}}>
+          <h2 className='p-10 text-4xl'>{hoveredNav}</h2>
           <div className='px-6 h-20 w-full grid grid-cols-4'>    
             {
               navDropDownData[hoveredNav].Links.map((column) => {
@@ -126,19 +132,19 @@ export default function Home() {
         </div>
         
         {/* Covid Notice */}
-        <section className='m-0'>
-          <div className='h-auto bg-purple-900 text-white'>
+        <section className=''>
+          <div className='h-auto bg-blue-dark text-white '>
               <p className='py-1 text-center text-sm align-middle'> Visit our <b> COVID-19 webpage </b> for the latest updates. </p>
           </div>
         </section>
 
         {/* Carousel */}
         <section>
-          <div className='h-[600px] min-w-full'>
-              <Image src={carouselImages[activeCarouselImage].img} alt={carouselImages[activeCarouselImage].alt} style={{"object-fit": "cover", "object-position": "50% 20%", "minHeight": "100%", "maxHeight": "100%", "userSelect": "none"}}/>
+          <div className='h-[600px] min-w-full mx-auto'>
+              <Image src={carouselImages[activeCarouselImage].img} alt={carouselImages[activeCarouselImage].alt} style={{"object-fit": "cover", "object-position": "50%, 20%", "minHeight": "100%", "maxHeight": "100%", minWidth: "100%", "userSelect": "none"}}/>
           </div>
 
-            {/* <div className='-translate-y-32 '>  */}
+            {/* Image Overlayed Elements  */}
             <div className='relative'> 
               {/* Carousel Playback */}
               <div className='-translate-y-24 -my-20'>
@@ -149,38 +155,86 @@ export default function Home() {
                       return (
                         <button 
                           key={indx}
-                          className={ activeCarouselImage != indx 
-                            ? 'border-2 border-white rounded-full w-6 h-6 hover:border-yellow-500 mx-1' 
-                            : 'border-2 border-white bg-white rounded-full w-6 h-6 hover:border-yellow-500 mx-1'}
-                          onClick={() => {setActiveCarouselImage(indx)}} />
+                          className={ indx == activeCarouselImage 
+                            ? ' bg-white rounded-full w-4 h-4 hover:bg-blue-neutral mx-1'
+                            :'border-4 border-white rounded-full w-4 h-4 hover:border-blue-neutral mx-1'
+                          }
+                          onClick={() => {updateActiveCarouselImage(indx)}} />
                       )
                     })
                   }
                   
-                  <BiPause  className={ playing == true ? 'text-3xl hover:text-yellow-500 text-white' : 'hidden'} onClick={() => {setPlaying(false)}}/>
-                  <BiPlay className={ playing ? 'hidden' : 'text-3xl hover:text-yellow-500 text-white'} onClick={() => {setPlaying(true)}}/>
+                  <BiPause  className={ playing == true ? 'text-3xl hover:text-blue-neutral text-white' : 'hidden'} onClick={() => {setPlaying(false)}}/>
+                  <BiPlay className={ playing ? 'hidden' : 'text-3xl hover:text-blue-neutral text-white'} onClick={() => {setPlaying(true)}}/>
                 </ul>
               </div>
             
               {/* Banner */}
-              <div className='bg-white text-center w-3/5 rounded-3xl p-4 mx-auto max-w-4xl mb-16'>
+              <div className='bg-white text-center w-3/5 rounded-3xl p-4 mx-auto max-w-lg mb-16'>
                 <h1 className='text-4xl font-semibold'> { carouselImages[activeCarouselImage].bannerHeadline } </h1>
-                <p className='text-lg mt-4'> {carouselImages[activeCarouselImage].bannerBlurb}
-                   <a className='text-blue-500 hover:underline hover:cursor-pointer'> Read more. </a>
-                </p>
+                <p className='text-lg mt-4'> {carouselImages[activeCarouselImage].bannerBlurb()} </p>
               </div>
             </div>
           </section>
 
           {/* Find a degree */}
-          <div className='max-w-6xl mx-auto text-center '>
-            <hr className='w-[80%] mx-auto'/>
-            <h2 className='text-4xl my-10'> Find a degree </h2>
+          <section className='max-w-6xl text-center mx-auto mb-10 w-[80%]'>
+            <div className=''>
+              <hr className='mx-auto'/>
+              <h2 className='text-4xl my-10'> Find a degree </h2>
 
-            <form action="" method="post">
-              <input type="text" placeholder='Search UniSQ degrees' name="degreeSearch" id="degreeSearch" className="border-black border-[1px] rounded-lg w-80 h-8 p-6" />
-            </form>
-          </div>
+              <form action="" method="post" className='outline outline-black outline-[1px] rounded-md w-2/3 mx-auto flex justify-between mb-8 '>
+                  <input type="text" placeholder='Search Muggle degrees' name="degreeSearch" id="degreeSearch" className="pl-4 w-full"/>                
+                  <BiSearch className='text-blue-neutral bg-blue-dark h-14 w-12 py-3 || hover:cursor-pointer hover:text-blue-dark hover:bg-blue-neutral '/>
+              </form>
+            </div>
+            
+            {/* Links to study areas */}
+            <ul className={ mobileMode == true ? 'grid grid-cols-2 gap-3' : 'grid grid-cols-3 gap-3'}>
+              {
+                [
+                  "Argiculture & Environment", "Arts & Humanities", "Aviation", 
+                  "Business & Management", "Education & Teaching", "Engineering", 
+                  "Information & Communication Technology", "Law & Criminology", "Media & Communication",
+                  "Nursed & Allied Health", "Psychology & Human Services", "Sciences",
+                  "Surveying & Built Environment", "Visual & Performing Arts", ( <a href="#" className='text-blue-neutral font-semibold'> + New degrees </a> )
+                ].map((e) => { return (
+                  <li className='hover:cursor-pointer border-b-2 hover:border-b-blue-neutral'>
+                    <div className='text-left flex justify-between items-center py-2 mb-2 '>
+                      <p> {e} </p>
+                      <BiChevronRight className='text-xl'/>
+                    </div>
+                  </li>
+                )})
+              }
+            </ul>
+
+            <h2 className='text-4xl mt-16 mb-8'> Other study options </h2>
+
+            <ul className={ mobileMode == true ? 'grid grid-cols-2 gap-3' : 'grid grid-cols-3 gap-3'}>
+                {
+                  [
+                    "Double degrees", "English Language", "Pathways",
+                    "Short programs", "Single courses", "Muggle Upskill"
+                  ].map((e) => { return (
+                    <li className='hover:cursor-pointer border-b-2 hover:border-b-blue-neutral'>
+                      <div className='text-left flex justify-between items-center py-2 mb-2 '>
+                        <p> {e} </p>
+                        <BiChevronRight className='text-xl'/>
+                      </div>
+                    </li>
+                  )})
+                }
+            </ul>
+            
+            <h2 className='text-2xl mt-16 mb-5'> Already know what you want to study? </h2>
+            
+            <div className='mx-auto'>
+              <button className='py-4 px-8 m-5 w-22 bg-blue-neutral text-blue-dark rounded-2xl font-semibold'> Apply <BiChevronRight className='text-xl inline'/> </button>
+              {mobileMode == true ? <br /> : <></>}
+              <button className='py-4 px-8 m-5 text-blue-neutral bg-blue-dark rounded-2xl font-semibold'> Enquire <BiChevronRight className='text-xl inline'/> </button>
+            </div>
+          </section>
 
       </main>
 
