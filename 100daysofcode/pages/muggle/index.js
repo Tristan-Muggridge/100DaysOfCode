@@ -11,7 +11,7 @@ import carousel1 from "../../public/Muggle/carousel1.jpg"
 import carousel2 from "../../public/Muggle/carousel2.jpg"
 import carousel3 from "../../public/Muggle/carousel3.jpg"
 
-import {navDropDownData} from "./navDropDownData";
+import {navDropDownData} from "../../data/navDropDownData";
 import { useState, useEffect } from 'react'
 
 const navHoverables = {Study: "Study", "Current Students": "Current Students", Research: "Research", Alumni: "Alumni", About: "About", None: "None", Magnify:"Magnify"};

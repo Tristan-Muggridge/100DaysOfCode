@@ -7,7 +7,7 @@ export default function Home() {
           <p className="mx-auto pt-40 text-center ">Please navigate to one of my following projects</p>
           
           <ul className="mt-20 w-auto mx-auto list-decimal hover:underline hover:text-gray-300">
-            <li><a href="/unisq"> UniSQ Branding </a></li>
+            <li><a href="/muggle"> UniSQ Branding </a></li>
           </ul>
         
         </div>
