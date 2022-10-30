@@ -89,7 +89,7 @@ export default function Home() {
                     ["Study", "Current Students", "Research", "Alumni", "About"].map((e, indx) => {
                       return (
                         <li key={indx} 
-                            className={hoveredNav != navHoverables[e] ? 'mt-3 px-4 pb-4 || text-lg text-blue-dark' : 'mt-3 px-4 pb-2 text-lg text-blue-dark|| border-b-blue-neutral border-b-4 cursor-pointer'}
+                            className={hoveredNav != navHoverables[e] ? 'mt-3 px-4 pb-4 text-lg text-blue-dark || select-none' : 'mt-3 px-4 pb-2 text-lg text-blue-dark select-none || border-b-blue-neutral border-b-4 cursor-pointer'}
                             onMouseEnter={ () => {setHoveredNav(navHoverables[e])} }
                             onMouseLeave={ () => {setHoveredNav(navHoverables.None)}}
                         > {e} </li>
@@ -172,7 +172,7 @@ export default function Home() {
               </div>
             
               {/* Banner */}
-              <div className='bg-white text-center w-3/5 rounded-3xl p-4 mx-auto max-w-lg mb-16'>
+              <div className='bg-white text-center w-3/5 h-44 rounded-3xl p-4 mx-auto max-w-lg mb-16'>
                 <h1 className='text-4xl font-semibold'> { carouselImages[activeCarouselImage].bannerHeadline } </h1>
                 <p className='text-lg mt-4'> {carouselImages[activeCarouselImage].bannerBlurb()} </p>
               </div>
