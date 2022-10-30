@@ -13,6 +13,7 @@ import carousel3 from "../../public/Muggle/carousel3.jpg"
 
 import {navDropDownData} from "../../data/navDropDownData";
 import { useState, useEffect } from 'react'
+import { getFontDefinitionFromNetwork } from 'next/dist/server/font-utils'
 
 const navHoverables = {Study: "Study", "Current Students": "Current Students", Research: "Research", Alumni: "Alumni", About: "About", None: "None", Magnify:"Magnify"};
 const carouselImages = [
@@ -48,6 +49,7 @@ export default function Home() {
 
   useEffect(() => {
     setWindowDimensions({height: window.innerHeight, width: window.innerWidth});
+    window.innerWidth > 819 ? setMobileMode(false) : setMobileMode(true);
     window.addEventListener('resize', onResize);
   }, []);
 
