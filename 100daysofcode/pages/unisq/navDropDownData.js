@@ -16,7 +16,7 @@ export const navDropDownData = {
           "International students"
         ],
         [
-          "Applying to UniSQ",
+          "Applying to Muggle",
           "Key dates",
           "Study online",
           "Fees and scholarships"
@@ -40,13 +40,13 @@ export const navDropDownData = {
           "COVID Learning"
         ],
         [
-          "UniSQ Handbook",
+          "Muggle Handbook",
           "Administration",
           "Graduations"
         ]
       ], 
       Prompt: "Get in touch and find answers to frequently asked questions.", 
-      ButtonText: "Need help? Ask UniSQ"
+      ButtonText: "Need help? Ask Muggle"
     },
     Research: {
       Links: [
@@ -63,14 +63,14 @@ export const navDropDownData = {
           "iLAuNCH"
         ]
       ], 
-      Prompt: "Find a researcher, research supervisor or a UniSQ expert", 
+      Prompt: "Find a researcher, research supervisor or a Muggle expert", 
       ButtonText: "Find a researcher"
     },
     Alumni: {
       Links: [
         [
           "Alumni benefits",
-          "Contribute to UniSQ"
+          "Contribute to Muggle"
         ],
         [
           "Alumnus of the Year Awards",
@@ -80,7 +80,7 @@ export const navDropDownData = {
           "Alumni community"
         ]
       ], 
-      Prompt: "Connect with UniSQ and your fellow alumni", 
+      Prompt: "Connect with Muggle and your fellow alumni", 
       ButtonText: "Update your details"
     },
     About: {
@@ -93,18 +93,18 @@ export const navDropDownData = {
         ],
         [
           "Our values and culture",
-          "UniSQ News",
-          "UniSQ Events",
-          "UniSQ stories"
+          "Muggle News",
+          "Muggle Events",
+          "Muggle stories"
         ],
         [
-          "Jobs at UniSQ",
+          "Jobs at Muggle",
           "Locations",
           "Residential Colleges"
         ]
       ], 
       Prompt: "There are many ways you can make a difference, and your support can transform lives.", 
-      ButtonText: "Give to UniSQ"
+      ButtonText: "Give to Muggle"
     },
     None: {
       Links: [], 
