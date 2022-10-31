@@ -1,6 +1,6 @@
 import Head from 'next/head'
 
-import { NavBar } from './NavBar'
+import NavBar from './NavBar'
 
 // Icons
 import { BiSearch, BiPlay, BiPause, BiChevronRight } from 'react-icons/bi'
