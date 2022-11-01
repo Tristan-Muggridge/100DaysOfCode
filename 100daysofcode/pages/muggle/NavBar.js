@@ -6,7 +6,6 @@ import {navDropDownData} from "../../data/navDropDownData"
 
 import { BiSearch, BiMenu } from 'react-icons/bi'
 
-
 export default function Navbar() {
 
     const navHoverables = {Study: "Study", "Current Students": "Current Students", Research: "Research", Alumni: "Alumni", About: "About", None: "None", Magnify:"Magnify"};

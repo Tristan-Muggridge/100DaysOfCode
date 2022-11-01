@@ -1,18 +1,20 @@
 import Head from 'next/head'
+import Image from 'next/image'
 
+// Components
 import NavBar from './NavBar'
+import Carousel from './Carousel'
+import Button from './Button'
 
 // Icons
-import { BiSearch, BiPlay, BiPause, BiChevronRight } from 'react-icons/bi'
-
-// Apparently can't use img in React? Problem for another day because this works!
-import Image from "next/image"
+import { BiSearch, BiChevronRight } from 'react-icons/bi'
+import { IoRibbonOutline } from 'react-icons/io5'
+import { SlBookOpen } from 'react-icons/sl'
+import { BsPeople } from 'react-icons/bs'
 
 import carousel1 from "../../public/Muggle/carousel1.jpg"
 import carousel2 from "../../public/Muggle/carousel2.jpg"
 import carousel3 from "../../public/Muggle/carousel3.jpg"
-
-import { useState, useEffect } from 'react'
 
 // const navHoverables = {Study: "Study", "Current Students": "Current Students", Research: "Research", Alumni: "Alumni", About: "About", None: "None", Magnify:"Magnify"};
 const carouselImages = [
@@ -22,28 +24,9 @@ const carouselImages = [
 ];
 
 export default function Home() {
-
-  const updateActiveCarouselImage = (element) => {setActiveCarouselImage(element)}
-
-  // const [ hoveredNav, setHoveredNav ] = useState(navHoverables.None);
-  const [ activeCarouselImage, setActiveCarouselImage ] = useState(0);
-  const [ playing, setPlaying ] = useState(true);
-
-  useEffect(() => {
-    if (playing == false) return;
-
-    const interval = setInterval(() => {
-      const nextImage = activeCarouselImage + 1 < carouselImages.length ? activeCarouselImage + 1 : 0;
-      updateActiveCarouselImage( nextImage );
-    }, 6000);
   
-    return () => {
-      clearInterval(interval);
-    };
-  }, [updateActiveCarouselImage, setPlaying]);
-
   return (
-    <div className='w-full'>
+    <div className='w-full scroll-smooth'>
       <Head>
         <title>Mock-Muggle Branding</title>
         <meta name="description" content="Attempting to recreate the UniSQ home page to learn more about front-end development and Tailwind CSS" />
@@ -52,6 +35,7 @@ export default function Home() {
 
       <main className='bg-white'>
 
+        {/* Navigation Bar */}
         <NavBar />
 
         {/* Covid Notice */}
@@ -62,43 +46,7 @@ export default function Home() {
         </section>
 
         {/* Carousel */}
-        <section>
-          <div className='h-[600px] min-w-full mx-auto'>
-              <Image src={carouselImages[activeCarouselImage].img} alt={carouselImages[activeCarouselImage].alt} style={{"object-fit": "cover", "object-position": "50%, 20%", "minHeight": "100%", "maxHeight": "100%", minWidth: "100%", "userSelect": "none"}}/>
-          </div>
-
-            {/* Image Overlayed Elements  */}
-            <div className='relative'> 
-              {/* Carousel Playback */}
-              <div className='-translate-y-24 -my-20'>
-                <ul className='flex justify-center mx-auto items-center'>
-                  
-                  {
-                    carouselImages.map((e, indx) => {
-                      return (
-                        <button 
-                          key={indx}
-                          className={ indx == activeCarouselImage 
-                            ? ' bg-white rounded-full w-4 h-4 hover:bg-blue-neutral mx-1'
-                            :'border-4 border-white rounded-full w-4 h-4 hover:border-blue-neutral mx-1'
-                          }
-                          onClick={() => {updateActiveCarouselImage(indx)}} />
-                      )
-                    })
-                  }
-                  
-                  <BiPause  className={ playing == true ? 'text-3xl hover:text-blue-neutral text-white' : 'hidden'} onClick={() => {setPlaying(false)}}/>
-                  <BiPlay className={ playing ? 'hidden' : 'text-3xl hover:text-blue-neutral text-white'} onClick={() => {setPlaying(true)}}/>
-                </ul>
-              </div>
-            
-              {/* Banner */}
-              <div className='bg-white text-center w-3/5 h-44 rounded-3xl p-4 mx-auto max-w-lg mb-16'>
-                <h1 className='text-4xl font-semibold'> { carouselImages[activeCarouselImage].bannerHeadline } </h1>
-                <p className='text-lg mt-4'> {carouselImages[activeCarouselImage].bannerBlurb()} </p>
-              </div>
-            </div>
-          </section>
+        <Carousel carouselImages={carouselImages}/>
 
           {/* Find a degree */}
           <section className='max-w-6xl text-center mx-auto mb-10 w-[80%]'>
@@ -106,7 +54,7 @@ export default function Home() {
               <hr className='mx-auto'/>
               <h2 className='text-4xl my-10'> Find a degree </h2>
 
-              <form action="" method="post" className='outline outline-black outline-[1px] rounded-md w-2/3 mx-auto flex justify-between mb-8 '>
+              <form action="" method="post" className='mb-14 mx-auto outline flex justify-between outline-black outline-[1px] rounded-md w-2/3'>
                   <input type="text" placeholder='Search Muggle degrees' name="degreeSearch" id="degreeSearch" className="pl-4 w-full"/>                
                   <BiSearch className='text-blue-neutral bg-blue-dark h-14 w-12 py-3 || hover:cursor-pointer hover:text-blue-dark hover:bg-blue-neutral '/>
               </form>
@@ -153,12 +101,49 @@ export default function Home() {
             <h2 className='text-2xl mt-16 mb-5'> Already know what you want to study? </h2>
             
             <div className='mx-auto'>
-              <button className='py-4 px-8 m-5 w-22 bg-blue-neutral text-blue-dark rounded-2xl font-semibold md:w-40 w-full'> Apply <BiChevronRight className='text-xl inline'/> </button>
-              <button className='py-4 px-8 m-5 text-blue-neutral bg-blue-dark rounded-2xl font-semibold md:w-40 w-full'> Enquire <BiChevronRight className='text-xl inline'/> </button>
+              <Button text={'Apply'} bg={'blue-neutral'} fontColour={'blue-dark'} />
+              <Button text={'Enquire'} bg={'blue-dark'} fontColour={'blue-neutral'} />
             </div>
           </section>
-
       </main>
+
+      <section className='w-full bg-blue-dark'>
+        <div className='h-96 grid grid-cols-3 justify-items-center text-white'>
+          
+          <div className='py-24 px-14 mx-18 text-center'> 
+            <IoRibbonOutline size={70} className='mx-auto'/>
+            <p className='my-5 text-3xl font-semibold'> No. 1 </p>
+            <p className='text-lg'> Ranked No. 1 internationally for magically-challenged starting salary. </p>
+          </div>
+          <div className='py-24 px-14 mx-18 text-center'> 
+            <SlBookOpen size={70} className='mx-auto'/>
+            <p className='my-5 text-3xl font-semibold'> No. 1 </p>
+            <p className='text-lg'> Ranked No. 1 internationally for magically-challenged starting salary. </p>
+          </div>
+          <div className='py-24 px-14 mx-18 text-center'> 
+            <BsPeople size={70} className='mx-auto'/>
+            <p className='my-5 text-3xl font-semibold'> No. 1 </p>
+            <p className='text-lg'> Ranked No. 1 internationally for magically-challenged starting salary. </p>
+          </div>
+        </div>
+        
+        <div className='flex justify-center pb-8'>
+          <Button text={'Discover More'} bg={'white'} fontColour={'black'} additional={'outline outline-2 outline-black'}/>
+        </div>
+      </section>
+
+      <section>
+        <h2 className='my-16 text-4xl text-center'> Muggle News </h2>
+        <div className='grid grid-cols-2 gap-8 mb-16 justify-center'>
+        {
+          [{src: carousel1, blurb: ""},{src: carousel2, blurb: ""}].map((e) => {return (
+            <div className='relative overflow-hidden'>
+              <Image src={carousel1} layout='Fill' objectFit='contain' width='100%%' height='100%' className='rounded-tr-3xl rounded-bl-3xl relative'/>
+            </div>
+          )})
+        }
+        </div>
+      </section>
 
     </div>
   )
