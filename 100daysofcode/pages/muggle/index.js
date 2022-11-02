@@ -16,6 +16,9 @@ import carousel1 from "../../public/Muggle/carousel1.jpg"
 import carousel2 from "../../public/Muggle/carousel2.jpg"
 import carousel3 from "../../public/Muggle/carousel3.jpg"
 
+import news1 from "../../public/Muggle/news1.jpg"
+import news2 from "../../public/Muggle/news2.jpg"
+
 // const navHoverables = {Study: "Study", "Current Students": "Current Students", Research: "Research", Alumni: "Alumni", About: "About", None: "None", Magnify:"Magnify"};
 const carouselImages = [
   {img: carousel1, alt: "", bannerHeadline: "Rise in global rankings", bannerBlurb: () => {return (<span>Muggle University has been named in the Top 301-350 in the Time Higher Education World University Rankings. <a className='text-blue-neutral hover:underline hover:cursor-pointer'> Read more. </a></span>)}}, 
@@ -113,35 +116,92 @@ export default function Home() {
           <div className='py-24 px-14 mx-18 text-center'> 
             <IoRibbonOutline size={70} className='mx-auto'/>
             <p className='my-5 text-3xl font-semibold'> No. 1 </p>
-            <p className='text-lg'> Ranked No. 1 internationally for magically-challenged starting salary. </p>
+            <p className='md:text-lg lg:text-2xl'> Ranked No. 1 internationally for magically-challenged starting salary. </p>
           </div>
           <div className='py-24 px-14 mx-18 text-center'> 
             <SlBookOpen size={70} className='mx-auto'/>
             <p className='my-5 text-3xl font-semibold'> No. 1 </p>
-            <p className='text-lg'> Ranked No. 1 internationally for magically-challenged starting salary. </p>
+            <p className='md:text-lg lg:text-2xl'> Ranked No. 1 internationally for magically-challenged starting salary. </p>
           </div>
           <div className='py-24 px-14 mx-18 text-center'> 
             <BsPeople size={70} className='mx-auto'/>
             <p className='my-5 text-3xl font-semibold'> No. 1 </p>
-            <p className='text-lg'> Ranked No. 1 internationally for magically-challenged starting salary. </p>
+            <p className='md:text-lg lg:text-2xl'> Ranked No. 1 internationally for magically-challenged starting salary. </p>
           </div>
         </div>
         
-        <div className='flex justify-center pb-8'>
+        <div className='flex justify-center pb-8 mt-16'>
           <Button text={'Discover More'} bg={'white'} fontColour={'black'} additional={'outline outline-2 outline-black'}/>
         </div>
       </section>
 
       <section>
         <h2 className='my-16 text-4xl text-center'> Muggle News </h2>
-        <div className='grid grid-cols-2 gap-8 mb-16 justify-center'>
+        <div className='grid grid-cols-1 gap-8 mb-20 justify-center mx-10 || lg:grid-cols-2'>
         {
-          [{src: carousel1, blurb: ""},{src: carousel2, blurb: ""}].map((e) => {return (
-            <div className='relative overflow-hidden'>
-              <Image src={carousel1} layout='Fill' objectFit='contain' width='100%%' height='100%' className='rounded-tr-3xl rounded-bl-3xl relative'/>
+          [{src: news1, blurb: "Join us on astronomy night!"},{src: news2, blurb: "Patronus summoning night"}].map((e) => {return (
+            <div className='mx-auto my-10 w-[80%] h-[40rem] overflow-hidden hover:cursor-pointer' style={{position: "relative"}}>
+              <Image src={e.src} alt={e.blurb} style={{"object-fit": "cover", "object-position": "0%, 0%", "minHeight": "100%", "maxHeight": "100%", minWidth: "100%", "userSelect": "none"}} className="rounded-tr-[25%] rounded-bl-[25%]"/>
+              <div style={{boxShadow:"inset 0 150px 80px -2px black"}} className='absolute h-full w-full top-0 rotate-180 rounded-tr-[25%] rounded-bl-[25%]'>
+                <div className='bottom-0 text-white text-center w-full relative rotate-180 pb-12'>
+                  <p className='font-semibold text-2xl'>{e.blurb}</p>
+                </div>
+              </div>
             </div>
           )})
         }
+        </div>
+        <div className='flex justify-center'>
+          <Button text={'Expore all news'} bg={'white'} fontColour={'black'} additional={'outline outline-2 outline-black'}/>
+        </div>
+      </section>       
+
+      <section className='bg-cream py-5 mt-10 w-full'>
+        <h2 className='my-16 text-4xl text-center'> Upcoming events </h2>
+        <div className='grid grid-cols-3 gap-4 justify-center lg:grid-cols-3 mx-10'>
+          <div className='h-64 w-70 relative'>
+            <Image 
+              src={news1} 
+              alt={"e.blurb"} 
+              style={{"object-fit": "cover", "object-position": "0%, 0%", "minHeight": "100%", "maxHeight": "100%", minWidth: "100%"}} 
+            />
+            <div className='h-40 w-full absolute bg-white text-black text-2xl top-48 rounded-tr-2xl px-4 || transition-transform duration-700 hover:translate-y-14'>
+              <p className='my-2 font-light text-blue-dark'> 30 Nov 2022 </p>
+              <p className='my-2 font-semibold'> Title of the event that is upcoming </p>
+              <p className='my-2 font-normal text-sm'> location and time at time from beginning AM - end PM </p>
+              <BiChevronRight size={40} className='absolute right-0 top-0'/>
+            </div>
+          </div>
+          <div className='h-64 w-70 relative'>
+            <Image 
+              src={news1} 
+              alt={"e.blurb"} 
+              style={{"object-fit": "cover", "object-position": "0%, 0%", "minHeight": "100%", "maxHeight": "100%", minWidth: "100%"}} 
+            />
+            <div className='h-40 w-full absolute bg-white text-black text-2xl top-48 rounded-tr-2xl px-4 || transition-transform duration-700 hover:translate-y-14'>
+              <p className='my-2 font-light text-blue-dark'> 30 Nov 2022 </p>
+              <p className='my-2 font-semibold'> Title of the event that is upcoming </p>
+              <p className='my-2 font-normal text-sm'> location and time at time from beginning AM - end PM </p>
+              <BiChevronRight size={40} className='absolute right-0 top-0'/>
+            </div>
+          </div>
+          <div className='grid grid-cols-1 grid-rows-3 gap-2'>
+            <div className='bg-white w-full py-4 rounded-2xl relative hover:bg-blue-dark hover:text-white || || transition-colors duration-300'>
+              <h4 className='font-light px-6'> August 16th</h4>
+              <p className='font-bold px-4'> This is a description of the event</p>
+              <BiChevronRight size={40} className='absolute right-0 top-7'/>
+            </div>
+            <div className='bg-white w-full py-4 rounded-2xl relative hover:bg-blue-dark hover:text-white || || transition-colors duration-300'>
+              <h4 className='font-light px-6'> August 16th</h4>
+              <p className='font-bold px-4'> This is a description of the event</p>
+              <BiChevronRight size={40} className='absolute right-0 top-7'/>
+            </div>
+            <div className='bg-white w-full py-4 rounded-2xl relative hover:bg-blue-dark hover:text-white || || transition-colors duration-300'>
+              <h4 className='font-light px-6'> August 16th</h4>
+              <p className='font-bold px-4'> This is a description of the event</p>
+              <BiChevronRight size={40} className='absolute right-0 top-7'/>
+            </div>
+          </div>
         </div>
       </section>
 
