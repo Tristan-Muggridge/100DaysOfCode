@@ -19,6 +19,8 @@ import carousel3 from "../../public/Muggle/carousel3.jpg"
 import news1 from "../../public/Muggle/news1.jpg"
 import news2 from "../../public/Muggle/news2.jpg"
 
+import london from "../../public/Muggle/london.jpg"
+
 // const navHoverables = {Study: "Study", "Current Students": "Current Students", Research: "Research", Alumni: "Alumni", About: "About", None: "None", Magnify:"Magnify"};
 const carouselImages = [
   {img: carousel1, alt: "", bannerHeadline: "Rise in global rankings", bannerBlurb: () => {return (<span>Muggle University has been named in the Top 301-350 in the Time Higher Education World University Rankings. <a className='text-blue-neutral hover:underline hover:cursor-pointer'> Read more. </a></span>)}}, 
@@ -156,9 +158,9 @@ export default function Home() {
         </div>
       </section>       
 
-      <section className='bg-cream py-5 mt-10 w-full'>
+      <section className='bg-cream py-5 my-20 w-full'>
         <h2 className='my-16 text-4xl text-center'> Upcoming events </h2>
-        <div className='grid grid-cols-3 gap-4 justify-center lg:grid-cols-3 mx-10'>
+        <div className='grid grid-cols-1 gap-40 justify-center  lg:gap-4 lg:grid-cols-3 mx-10'>
           <div className='h-64 w-70 relative'>
             <Image 
               src={news1} 
@@ -203,6 +205,43 @@ export default function Home() {
             </div>
           </div>
         </div>
+      </section>
+
+      {/* <section className="min-w-[600px] max-w-[1600px] h-96  bg-gray-500"> */}
+      <section className="grid grid-cols-1 justify-center mb-96">
+        <div className="mb-1 h-[500px] max-w-[1600px] justify-center relative mx-auto">
+          <Image 
+            src={london} 
+            alt={"e.blurb"} 
+            style={{"object-fit": "cover", "object-position": "0%, 0%", minWidth: "100%", maxHeight: "100%"}} 
+            className=''
+          />
+          <div className='p-4 bg-white w-80 h-80 absolute right-0 bottom-0 rounded-tl-2xl'>
+            <h3 className='text-2xl font-medium'>Leading cotton growers</h3>
+            <p className="my-5">
+              'Agriculture has always offered people the opportunity to do meaningful work that matters to our society, but how they are doing that work is changing.'
+            </p>
+            <a href=""> Discover more about our resarch</a>
+            <Button text={'Apply'} bg={'blue-neutral'} fontColour={'blue-dark mx-auto'} />
+          </div>
+        </div>
+        <div className="mb-1 h-[500px] max-w-[1600px] justify-center relative mx-auto">
+          <Image 
+            src={london} 
+            alt={"e.blurb"} 
+            style={{"object-fit": "cover", "object-position": "0%, 0%", minWidth: "100%", maxHeight: "100%"}} 
+            className=''
+          />
+          <div className='p-4 bg-white w-80 h-80 absolute left-0 bottom-0 rounded-tr-2xl'>
+            <h3 className='text-2xl font-medium'>Leading cotton growers</h3>
+            <p className="my-5">
+              'Agriculture has always offered people the opportunity to do meaningful work that matters to our society, but how they are doing that work is changing.'
+            </p>
+            <a href=""> Discover more about our resarch</a>
+            <Button text={'Apply'} bg={'blue-neutral'} fontColour={'blue-dark mx-auto'} />
+          </div>
+        </div>
+
       </section>
 
     </div>
